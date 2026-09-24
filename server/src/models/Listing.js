@@ -4,7 +4,13 @@ import mongoose from 'mongoose';
 
 const listingSchema = new mongoose.Schema(
   {
-    // TODO
+    title: { type: String, required: true },
+    description: { type: String, required: false },
+    price: { type: Number, required: true, min: 0 },
+    category: { type: String, enum: ['textbooks', 'electronics', 'clothing', 'furniture', 'other'], default: 'other', required: true },
+    condition: { type: String, enum: ['new', 'like new', 'used'], default: 'used', required: true },
+    status: { type: String, enum: ['active', 'sold',  'removed'], default: 'active', required: true },
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   },
   { timestamps: true }
 );
